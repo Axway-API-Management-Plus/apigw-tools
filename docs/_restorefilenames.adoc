@@ -1,0 +1,54 @@
+= Restore Project File Names
+:source-highlighter: prettify
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+== Abstract
+
+Restores the original names of entity store files after running `projupgrade` tool.
+
+== Background
+
+When a new release of an Axway API Gateway is used, all policy projects have to be upgraded to the new version.
+Local projects can be upgraded with the `projupgrade` tool provided by the client development tools.
+
+Unfortunately after using this tool all the file names of the XML entity store are changed.
+This has impacts if the entity store is managed by an SCM (e.g. Git).
+From the perspective of the SCM the files are deleted and new files are created.
+Or the SCM is able to automatically detect the renaming.
+In both cases it is confusing.
+
+This tool restores the original file names for the XML entity store.
+It only affect the names of the files, no content is changed.
+
+== Usage
+
+To restore the file names of a policy project in the folder `src/policies`, just invoke the tool with the parameter `--projdir` pointing to the project folder.
+
+.Example: invoke with local Python interpreter
+[source,shell]
+----
+$ python restorefilenames.py --projdir=src/policies
+----
+
+
+.Example: invoke with Axway Jython interpreter (Unix)
+[source,shell]
+----
+$ restorefilenames.sh --projdir=src/policies
+----
+
+.Example: invoke with Axway Jython interpreter (Windows)
+[source,cmd]
+----
+> restorefilenames.cmd --projdir=src/policies
+----
+
+IMPORTANT: For usage of the Jython interpreter the `AXWAY_HOME` environment variable has to be defined.

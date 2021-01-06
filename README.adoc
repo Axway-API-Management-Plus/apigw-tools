@@ -27,11 +27,15 @@ This repository provides a collection of tiny tools to operate Axway API Gateway
 |Name|Description
 |kpsexport
 |Add tool to export/import KPS tables in a convenient way.
+
+|restorefilenames
+|Restores the original names of entity store files after running `projupgrade` tool.
 |===
 
 == Tools
 
 include::docs/_kpsexport.adoc[leveloffset=+2]
+include::docs/_restorefilenames.adoc[leveloffset=+2]
 
 == Contributing
 Please read https://github.com/Axway-API-Management-Plus/Common/blob/master/Contributing.md[Contributing] for details on our code of conduct, and the process for submitting pull requests to us.

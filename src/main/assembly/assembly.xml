@@ -1,28 +1,53 @@
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
-  <id>dist</id>
-  <formats>
-      <format>zip</format>
-  </formats>
-  <fileSets>
-      <!-- KPS export/import tool -->
-      <fileSet>
-          <directory>${basedir}/src/main/resources/kpsexport</directory>
-          <outputDirectory>kpsexport</outputDirectory>
-          <excludes>
-              <exclude>_*</exclude>
-          </excludes>
-          <fileMode>0500</fileMode>
-          <lineEnding>unix</lineEnding>
-      </fileSet>
-      <fileSet>
-          <directory>${basedir}/src/main/resources/kpsexport</directory>
-          <outputDirectory>kpsexport</outputDirectory>
-          <includes>
-              <include>_*</include>
-          </includes>
-          <fileMode>0400</fileMode>
-          <lineEnding>unix</lineEnding>
-      </fileSet>
-  </fileSets>
+    <id>dist</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <fileSets>
+        <!-- Unix shell scripts -->
+        <fileSet>
+            <directory>${basedir}/src/main/resources</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>**/*.sh</include>
+            </includes>
+            <excludes>
+                <exclude>**/_*.sh</exclude>
+            </excludes>
+            <fileMode>0500</fileMode>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/src/main/resources</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>**/_*.sh</include>
+            </includes>
+            <fileMode>0400</fileMode>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+
+        <!-- Windows command scripts -->
+        <fileSet>
+            <directory>${basedir}/src/main/resources</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>**/*.cmd</include>
+            </includes>
+            <fileMode>0400</fileMode>
+            <lineEnding>windows</lineEnding>
+        </fileSet>
+
+        <!-- All other files -->
+        <fileSet>
+            <directory>${basedir}/src/main/resources</directory>
+            <outputDirectory>.</outputDirectory>
+            <excludes>
+                <exclude>**/*.cmd</exclude>
+                <exclude>**/*.sh</exclude>
+            </excludes>
+            <fileMode>0400</fileMode>
+        </fileSet>
+    </fileSets>
 </assembly>
