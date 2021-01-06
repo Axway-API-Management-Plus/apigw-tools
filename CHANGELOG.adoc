@@ -1,0 +1,11 @@
+= Changelog
+
+== Version 1.0.0
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|https://github.com/Axway-API-Management-Plus/apigw-tools/issues/1[#1]
+|Enhancement
+|Add tool to export/import KPS tables.
+|===
+

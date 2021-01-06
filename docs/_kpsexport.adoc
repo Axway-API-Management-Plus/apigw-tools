@@ -1,0 +1,132 @@
+= KPS Export/Import
+:source-highlighter: prettify
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+== Abstract
+
+Tool to export KPS tables from an API Gateway/Manager instance into an KPS table archive and to import the KPS table archive into an API Gateway/Manager instance.
+
+== Background
+
+This tool is a wrapper around `kpsadmin` to provide a convenient way to export and import KPS tables.
+
+The `kpsadmin` tool is part of the Axway API Gateway installation.
+Additional to other features it can be used to create a backup of the KPS tables and to restore the KPS tables.
+
+== Usage
+
+=== General
+
+IMPORTANT: The export/import scripts have to be executed on the server hosting the according API gateway instance.
+
+An environment variable `AXWAY_HOME` has to be defined which points to the home directory of the Axway API Gateway installation.
+This is the directory containing the `apigateway` sub-folder.
+
+.Example
+[source,shell]
+----
+$ export AXWAY_HOME=/opt/Axway-7.7
+----
+
+
+=== Export KPS Tables
+
+The `kpsexport.sh` script can be used to export the KPS tables of an API Gateway instance into a compressed archive (format: tgz).
+
+The script has to be invoked with the following options:
+
+[cols="2,<4a,1", options="header"]
+|===
+|Option|Description|Required
+|-u USER
+|Admin node manager user.
+|yes
+
+|-p PASSWORD
+|Password of the admin node manager user.
+|yes
+
+|-g GROUP
+|Group name of the API Gateway instance.
+|yes
+
+|-n INSTANCE
+|Name of the API Gateway instance
+|yes
+
+|-f FILE
+|File path of the target KPS archive (*.tgz)
+|yes
+|===
+
+
+.Example: export KPS tables
+[source,shell]
+----
+$ ./kpsexport.sh -u admin -p changeme -g APIM -n APIM1 -f ~/kps-tables.tgz
+----
+
+In the background the script executes following steps:
+
+  . Create KPS backup of API Gateway instance via `kpsadmin backup` (can be suppressed).
+  . Determine UUID of the backup.
+  . Create archive of backup file collection (same UUID prefix) from the API Gateway instance folder `conf/kps/backup`.
+
+
+=== Import KPS Tables
+
+The `kpsimport.sh` script can be used to import the KPS tables of a compressed archive (format: tgz) into an API Gateway instance.
+The archive has to be created by `kpsexport.sh`.
+
+IMPORTANT: After import all API Gateway instances of the same group have to be restarted.
+
+The script has to be invoked with the following options:
+
+[cols="2,<4a,1", options="header"]
+|===
+|Option|Description|Required
+|-u USER
+|Admin node manager user.
+|yes
+
+|-p PASSWORD
+|Password of the admin node manager user.
+|yes
+
+|-g GROUP
+|Group name of the API Gateway instance.
+|yes
+
+|-n INSTANCE
+|Name of the API Gateway instance
+|yes
+
+|-f FILE
+|File path of the source KPS archive (*.tgz)
+|yes
+
+|--no-backup
+|Suppress the creation of a backup.
+|no
+|===
+
+.Example: import KPS tables
+[source,shell]
+----
+$ ./kpsimport.sh -u admin -p changeme -g APIM -n APIM1 -f ~/kps-tables.tgz
+----
+
+In the background the script executes following steps:
+
+  . Extract archive to `conf/kps/backup` folder of the API Gateway instance.
+  . Create KPS backup of API Gateway instance via `kpsadmin backup` (can be suppressed).
+  . Clear KPS tables of API Gateway instance via `kpsadmin clear`.
+  . Restore archived KPS tables to the API Gateway instance via `kpsadmin restore`.
