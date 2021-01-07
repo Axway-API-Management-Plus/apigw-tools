@@ -35,6 +35,7 @@ This repository provides a collection of tiny tools to operate Axway API Gateway
 == Tools
 
 include::docs/_kpsexport.adoc[leveloffset=+2]
+
 include::docs/_restorefilenames.adoc[leveloffset=+2]
 
 == Contributing
