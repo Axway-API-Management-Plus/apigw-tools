@@ -18,6 +18,10 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+image:https://img.shields.io/github/license/Axway-API-Management-Plus/apigw-tools?style=plastic[]
+image:https://img.shields.io/github/v/release/Axway-API-Management-Plus/apigw-tools?style=plastic[]
+
+
 == About the Tools
 
 This repository provides a collection of tiny tools to operate Axway API Gateway/Manager.
@@ -37,6 +41,10 @@ This repository provides a collection of tiny tools to operate Axway API Gateway
 include::docs/_kpsexport.adoc[leveloffset=+2]
 
 include::docs/_restorefilenames.adoc[leveloffset=+2]
+
+== Installation
+
+For installation just download the latest version of the ZIP archive from the https://github.com/orgs/Axway-API-Management-Plus/packages?repo_name=apigw-tools[GitHub repository] and extract the files to the target directory.
 
 == Contributing
 Please read https://github.com/Axway-API-Management-Plus/Common/blob/master/Contributing.md[Contributing] for details on our code of conduct, and the process for submitting pull requests to us.
